@@ -1,43 +1,49 @@
-import { cn } from "@/lib/utils";
-import { SITE_CONFIG } from "@/lib/site-config";
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+import { SITE_CONFIG } from '@/lib/site-config'
 
 interface LogoProps {
-  className?: string;
-  variant?: 'default' | 'compact';
-  background?: string;
+  className?: string
+  variant?: 'default' | 'compact'
+  background?: string
 }
 
-export function Logo({ className, variant = 'default', background = 'bg-[#fbf6ee]' }: LogoProps) {
+export function Logo({ className, variant = 'default', background }: LogoProps) {
   if (variant === 'compact') {
     return (
-      <div className={cn("flex items-center justify-center", className)}>
-        <div className={cn("relative h-11 w-11 overflow-hidden rounded-xl border border-[#e8dbce] shadow-sm", background)}>
-          <div className="flex items-center justify-center h-full">
-            <span className="font-bold text-2xl text-[#1e40af]">M</span>
-            <span className="font-bold text-2xl text-[#fb923c] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] ml-[2px]">N</span>
-          </div>
+      <div className={cn('flex items-center justify-center', className)}>
+        <div className="relative h-10 w-10 overflow-hidden rounded-xl">
+          <Image
+            src="/logo.png"
+            alt={SITE_CONFIG.name}
+            fill
+            className="object-contain"
+            sizes="40px"
+            priority
+          />
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className={cn("flex items-center gap-3", className)}>
-      {/* Logo Icon */}
-      <div className={cn("relative h-11 w-11 overflow-hidden rounded-xl border border-[#e8dbce] shadow-sm", background)}>
-        <div className="flex items-center justify-center h-full">
-          <span className="font-bold text-2xl text-[#1e40af]">M</span>
-          <span className="font-bold text-2xl text-[#fb923c] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] ml-[2px]">N</span>
-        </div>
+    <div className={cn('flex items-center gap-3', className)}>
+      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl">
+        <Image
+          src="/logo.png"
+          alt={SITE_CONFIG.name}
+          fill
+          className="object-contain"
+          sizes="40px"
+          priority
+        />
       </div>
-      {/* Logo Text */}
       <div className="flex flex-col leading-none">
-        <span className="text-xl font-bold">
-          <span className="text-[#1e40af]">Media</span>
-          <span className="text-[#fb923c]">newsqo</span>
+        <span className="text-xl font-bold text-white">{SITE_CONFIG.name}</span>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-[#F5C45E]">
+          Press Distribution Desk
         </span>
-        <span className="text-[10px] uppercase tracking-widest text-[#1e40af]">PRESS DISTRIBUTION DESK</span>
       </div>
     </div>
-  );
+  )
 }

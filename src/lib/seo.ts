@@ -242,12 +242,13 @@ export async function buildSiteMetadata(): Promise<Metadata> {
     creator: SITE_CONFIG.name,
     icons: {
       icon: [
-        { url: '/favicon.ico' },
         { url: '/favicon.png', type: 'image/png' },
+        { url: '/favico.png', type: 'image/png' },
       ],
       apple: [
         { url: '/apple-icon.png' },
       ],
+      shortcut: '/favicon.png',
     },
     alternates: {
       canonical: ctx.canonical,
