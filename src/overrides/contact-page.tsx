@@ -2,98 +2,208 @@ import Image from 'next/image'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { SITE_CONFIG } from '@/lib/site-config'
+import { ArrowRight, Clock, FileText, Mail, Megaphone, Phone } from 'lucide-react'
 
 export const CONTACT_PAGE_OVERRIDE_ENABLED = true
 
+const lanes = [
+  {
+    icon: FileText,
+    title: 'Submit a press release',
+    body: 'Ready to distribute? Send us your release draft and we will review formatting, compliance, and distribution options.',
+  },
+  {
+    icon: Megaphone,
+    title: 'Distribution enquiries',
+    body: 'Questions about reach, partner newsrooms, or syndication channels? Our distribution team will walk you through the options.',
+  },
+  {
+    icon: Mail,
+    title: 'Editorial standards',
+    body: 'Need guidance on AP-style formatting, embargo policies, or boilerplate requirements? Our editorial desk is here to help.',
+  },
+  {
+    icon: Clock,
+    title: 'Urgent releases',
+    body: 'Breaking news or time-sensitive announcements? Flag your submission as urgent and we will prioritise the review queue.',
+  },
+]
+
 export function ContactPageOverride() {
-  const desk = `desk@${SITE_CONFIG.domain}`
-
   return (
-    <div className="min-h-screen bg-[var(--mn-cream)] text-[var(--mn-ink)]">
+    <div className="min-h-screen bg-[#FDF8F0] text-[#102E50]">
       <NavbarShell />
-      <main className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
-        <header className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.26em] text-[var(--mn-coral)]">Contact</p>
-          <h1 className="font-display mt-4 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Reach the Medianewsqo desk</h1>
-          <p className="mt-5 text-base leading-relaxed text-[var(--mn-ink-soft)]">
-            Questions about syndication, editorial standards, or a published release? Send a note and we will route it to the right producer.
-          </p>
-        </header>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <div className="rounded-[2rem] border border-[color-mix(in_srgb,var(--mn-coral)_22%,transparent)] bg-white p-7 shadow-[0_22px_55px_rgba(44,34,28,0.08)] sm:p-9">
-            <h2 className="font-display text-xl font-semibold">Send a message</h2>
-            <form className="mt-8 grid gap-4" action="/contact" method="get">
-              <div>
-                <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--mn-ink-soft)]">Name</label>
-                <input
-                  name="name"
-                  className="mt-2 h-12 w-full rounded-xl border border-[color-mix(in_srgb,var(--mn-coral)_25%,transparent)] bg-[var(--mn-cream)] px-4 text-sm outline-none focus:ring-2 focus:ring-[var(--mn-coral)]"
-                  placeholder="Your name"
-                  autoComplete="name"
-                />
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-[#102E50] py-16">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-[#F5C45E]/10 blur-[70px]" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#F5C45E]/40 bg-[#F5C45E]/12 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.28em] text-[#F5C45E]">
+            Contact
+          </span>
+          <h1 className="font-display mt-5 max-w-2xl text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-5xl">
+            Reach the {SITE_CONFIG.name} editorial desk
+          </h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-[#a8c4d8]">
+            Whether you are submitting a release, asking about distribution, or need editorial
+            guidance — we route every enquiry to the right team member.
+          </p>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
+        <div className="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+
+          {/* ── Contact form ── */}
+          <div className="rounded-[2rem] border border-[rgba(16,46,80,0.10)] bg-white p-8 shadow-[0_20px_60px_rgba(16,46,80,0.08)] sm:p-10">
+            <h2 className="font-display text-2xl font-semibold">Send a message</h2>
+            <p className="mt-2 text-sm text-[#3a5a7a]">
+              Fill in the details below and our team will respond within one business day.
+            </p>
+
+            <form className="mt-8 grid gap-5" action="/contact" method="get">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-[0.16em] text-[#3a5a7a]">
+                    Full name
+                  </label>
+                  <input
+                    name="name"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    className="mt-2 h-12 w-full rounded-xl border border-[rgba(16,46,80,0.15)] bg-[#f8f2e6] px-4 text-sm text-[#102E50] outline-none placeholder:text-[#3a5a7a]/50 focus:border-[#E78B48] focus:ring-2 focus:ring-[#E78B48]/20"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-[0.16em] text-[#3a5a7a]">
+                    Email address
+                  </label>
+                  <input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@company.com"
+                    className="mt-2 h-12 w-full rounded-xl border border-[rgba(16,46,80,0.15)] bg-[#f8f2e6] px-4 text-sm text-[#102E50] outline-none placeholder:text-[#3a5a7a]/50 focus:border-[#E78B48] focus:ring-2 focus:ring-[#E78B48]/20"
+                  />
+                </div>
               </div>
+
               <div>
-                <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--mn-ink-soft)]">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  className="mt-2 h-12 w-full rounded-xl border border-[color-mix(in_srgb,var(--mn-coral)_25%,transparent)] bg-[var(--mn-cream)] px-4 text-sm outline-none focus:ring-2 focus:ring-[var(--mn-coral)]"
-                  placeholder="you@company.com"
-                  autoComplete="email"
-                />
-              </div>
-              <div>
-                <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--mn-ink-soft)]">Organization</label>
+                <label className="text-xs font-bold uppercase tracking-[0.16em] text-[#3a5a7a]">
+                  Organisation
+                </label>
                 <input
                   name="org"
-                  className="mt-2 h-12 w-full rounded-xl border border-[color-mix(in_srgb,var(--mn-coral)_25%,transparent)] bg-[var(--mn-cream)] px-4 text-sm outline-none focus:ring-2 focus:ring-[var(--mn-coral)]"
-                  placeholder="Company or publication"
+                  placeholder="Company or agency name"
+                  className="mt-2 h-12 w-full rounded-xl border border-[rgba(16,46,80,0.15)] bg-[#f8f2e6] px-4 text-sm text-[#102E50] outline-none placeholder:text-[#3a5a7a]/50 focus:border-[#E78B48] focus:ring-2 focus:ring-[#E78B48]/20"
                 />
               </div>
+
               <div>
-                <label className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--mn-ink-soft)]">How can we help?</label>
+                <label className="text-xs font-bold uppercase tracking-[0.16em] text-[#3a5a7a]">
+                  Enquiry type
+                </label>
+                <select
+                  name="type"
+                  className="mt-2 h-12 w-full rounded-xl border border-[rgba(16,46,80,0.15)] bg-[#f8f2e6] px-4 text-sm text-[#102E50] outline-none focus:border-[#E78B48] focus:ring-2 focus:ring-[#E78B48]/20"
+                >
+                  <option value="">Select an option</option>
+                  <option value="submit">Submit a press release</option>
+                  <option value="distribution">Distribution enquiry</option>
+                  <option value="editorial">Editorial standards</option>
+                  <option value="urgent">Urgent release</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold uppercase tracking-[0.16em] text-[#3a5a7a]">
+                  Message
+                </label>
                 <textarea
                   name="message"
-                  className="mt-2 min-h-[160px] w-full rounded-2xl border border-[color-mix(in_srgb,var(--mn-coral)_25%,transparent)] bg-[var(--mn-cream)] px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[var(--mn-coral)]"
-                  placeholder="Brief context, links, and the best time to reply."
+                  placeholder="Describe your release, question, or request. Include any relevant deadlines or embargo dates."
+                  className="mt-2 min-h-[160px] w-full rounded-2xl border border-[rgba(16,46,80,0.15)] bg-[#f8f2e6] px-4 py-3 text-sm text-[#102E50] outline-none placeholder:text-[#3a5a7a]/50 focus:border-[#E78B48] focus:ring-2 focus:ring-[#E78B48]/20"
                 />
               </div>
+
               <button
                 type="button"
-                className="h-12 rounded-full bg-[var(--mn-coral)] text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#102E50] text-sm font-bold text-white shadow-sm transition hover:bg-[#0d2540]"
               >
-                Submit inquiry
+                Send enquiry
+                <ArrowRight className="h-4 w-4" />
               </button>
-              <p className="text-xs leading-relaxed text-[var(--mn-ink-soft)]">
-                This form is a visual contact surface for visitors. Wire your preferred backend or helpdesk endpoint without changing routes.
+
+              <p className="text-xs leading-relaxed text-[#3a5a7a]">
+                We respond to all enquiries within one business day. For urgent releases, please
+                select "Urgent release" above.
               </p>
             </form>
           </div>
 
-          <div className="space-y-8">
-            <div className="relative overflow-hidden rounded-[2rem] border border-[color-mix(in_srgb,var(--mn-coral)_20%,transparent)] shadow-lg">
-              <div className="relative aspect-[5/4] w-full">
+          {/* ── Right column ── */}
+          <div className="space-y-6">
+            {/* image */}
+            <div className="relative overflow-hidden rounded-[2rem] shadow-[0_20px_55px_rgba(16,46,80,0.12)]">
+              <div className="relative aspect-[5/3] w-full">
                 <Image
                   src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=900&q=80"
-                  alt=""
+                  alt="Editorial desk"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 420px"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#102E50]/60 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F5C45E]">
+                    Editorial desk
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-white">
+                    Every release reviewed before it hits the wire
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[color-mix(in_srgb,var(--mn-coral)_35%,transparent)] bg-[var(--mn-coral)]/10 p-6">
-              <h3 className="font-display text-lg font-semibold text-[var(--mn-ink)]">FAQ first</h3>
-              <p className="mt-2 text-sm text-[var(--mn-ink-soft)]">Many distribution questions are answered on the pricing page.</p>
-              <a href="/pricing#faq" className="mt-4 inline-flex text-sm font-semibold text-[var(--mn-coral)] hover:underline">
-                Open pricing FAQ →
+            {/* lanes */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {lanes.map(({ icon: Icon, title, body }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl border border-[rgba(16,46,80,0.10)] bg-white p-5 shadow-sm"
+                >
+                  <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#F5C45E]/15 text-[#E78B48]">
+                    <Icon className="h-4 w-4" strokeWidth={1.75} />
+                  </div>
+                  <h3 className="font-display mt-3 text-base font-semibold">{title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#3a5a7a]">{body}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* FAQ nudge */}
+            <div className="rounded-2xl border border-[rgba(231,139,72,0.30)] bg-[#E78B48]/8 p-6">
+              <h3 className="font-display text-lg font-semibold text-[#102E50]">
+                Check the FAQ first
+              </h3>
+              <p className="mt-2 text-sm text-[#3a5a7a]">
+                Many distribution and formatting questions are answered on our pricing page.
+              </p>
+              <a
+                href="/pricing#faq"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#E78B48] hover:underline"
+              >
+                Open pricing FAQ
+                <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </div>
           </div>
         </div>
       </main>
+
       <Footer />
     </div>
   )
